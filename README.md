@@ -37,6 +37,7 @@ $(function () {
 
 
 # Webpage Title
+$\int_a^b f(x) x dx$ gives the net area between $f(x)$ and the $x$-axis on the interval $[a,b]$
 
 ## Overview
 
