@@ -2,8 +2,8 @@
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
-function applySageA11y(){document.querySelectorAll('.compute').forEach(function(b){var d=b.dataset.alt||"Interactive mathematical graphic.";b.querySelectorAll('img').forEach(function(i){i.alt=d});b.querySelectorAll('pre.sagecell_stdout').forEach(function(p){p.setAttribute('role','status');p.setAttribute('aria-label','Current values from the interactive')})})}
-$(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});applySageA11y();new MutationObserver(applySageA11y).observe(document.body,{childList:true,subtree:true})});
+function makeAccessable(){document.querySelectorAll('.compute').forEach(function(b){var d=b.dataset.alt||"Interactive mathematical graphic.";b.querySelectorAll('img').forEach(function(i){i.alt=d});b.querySelectorAll('pre.sagecell_stdout').forEach(function(p){p.setAttribute('role','status');p.setAttribute('aria-label','Current values from the interactive')})})}
+$(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});makeAccessable();new MutationObserver(makeAccessable).observe(document.body,{childList:true,subtree:true})});
 </script>
 
 <!-- PART 2: Descriptive Content -->
