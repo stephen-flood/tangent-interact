@@ -2,14 +2,9 @@
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
-function applySageAlt(){document.querySelectorAll('.compute').forEach(function(box){box.querySelectorAll('img').forEach(function(img){img.alt=box.dataset.alt||"Interactive mathematical graphic."})})}
-$(function(){
-  sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});
-  applySageAlt();
-  new MutationObserver(applySageAlt).observe(document.body,{childList:true,subtree:true});
-});
-</script>
-<!-- END Setup Scripts  -->
+function applySageA11y(){document.querySelectorAll('.compute').forEach(function(b){var d=b.dataset.alt||"Interactive mathematical graphic.";b.querySelectorAll('img').forEach(function(i){i.alt=d});b.querySelectorAll('pre.sagecell_stdout').forEach(function(p){p.setAttribute('role','status');p.setAttribute('aria-label','Current values from the interactive')})})}
+$(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});applySageA11y();new MutationObserver(applySageA11y).observe(document.body,{childList:true,subtree:true})});
+</script><!-- END Setup Scripts  -->
 
 
 # Webpage Title
