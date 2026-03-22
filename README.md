@@ -1,6 +1,30 @@
+<!-- BEGIN Setup Scripts -->
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
+<script>
+function applySageAlt() {
+  document.querySelectorAll('.compute').forEach(function (box) {
+    box.querySelectorAll('img').forEach(function (img) {
+      img.alt = box.dataset.alt || "Interactive mathematical graphic.";
+    });
+  });
+}
+$(function () {
+  sagecell.makeSagecell({
+    inputLocation: 'div.compute',
+    template: sagecell.templates.minimal,
+    evalButtonText: 'Launch the Interactive Applet Now',
+    callback: function () {
+      applySageAlt();
+      new MutationObserver(applySageAlt).observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+  });
+});
+</script>
 $(function () {
 // Make *any* div with class 'compute' a Sage cell
 sagecell.makeSagecell({inputLocation: 'div.compute',
@@ -8,21 +32,22 @@ sagecell.makeSagecell({inputLocation: 'div.compute',
                        evalButtonText: 'Launch the Interactive Applet Now'});
 });
 </script>
-# The Definite Integral and Shaded Graphs</h1>
+<!-- END Setup Scripts from Sage for Undergraduates -->
 
-An Interactive Applet powered by Sage and MathJax.</p>
 
-(By Prof. Gregory V. Bard. Updated by Ryan G. Hornberger.)</p>
+# Webpage Title
 
 ## Overview
 
-Details will be posted later.
+(Explain the mathematics here)
 
 ## Instructions
 
-Details will be posted later.
+(Explain how to use your interactive here)
 
-<div class="compute">
+
+<div class="compute" 
+            data-alt="Graph of y = x^2 - 1 with the region between a and b shaded.">
 <script type="text/x-sage">
 
 f(x) = x^2 -1
