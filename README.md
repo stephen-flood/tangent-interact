@@ -33,12 +33,12 @@ ymax =  2
 @interact 
 def plot_tangent( a = slider( xmin, xmax, 0.05, -1.5 )):
 
-    print(f"You have selected a = {a}")
+    x1 = round(a,2)
+    print(f"You have selected a = {x1}")
 
     p1 = plot( f(x) , x, (xmin,xmax) )
 
     fprime = derivative(f, x)
-    x1 = a
     y1 = f( x1 )
     m = fprime( x1 )
     tangentline(x) = m*(x - x1) + y1
