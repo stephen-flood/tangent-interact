@@ -2,6 +2,14 @@
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
+  $(function () {
+// Make *any* div with class 'compute' a Sage cell
+// From sage for undergraduates
+sagecell.makeSagecell({inputLocation: 'div.compute',
+            template:       sagecell.templates.minimal,
+                       evalButtonText: 'Launch the Interactive Applet Now'});
+});
+</script>
 <script>
 function applySageAlt() {
   document.querySelectorAll('.compute').forEach(function (box) {
@@ -25,14 +33,7 @@ $(function () {
   });
 });
 </script>
-$(function () {
-// Make *any* div with class 'compute' a Sage cell
-sagecell.makeSagecell({inputLocation: 'div.compute',
-            template:       sagecell.templates.minimal,
-                       evalButtonText: 'Launch the Interactive Applet Now'});
-});
-</script>
-<!-- END Setup Scripts from Sage for Undergraduates -->
+<!-- END Setup Scripts  -->
 
 
 # Webpage Title
