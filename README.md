@@ -1,64 +1,72 @@
-<!-- BEGIN Setup Scripts -->
+<!-- PART 1: Setup Scripts -->
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
 function applySageA11y(){document.querySelectorAll('.compute').forEach(function(b){var d=b.dataset.alt||"Interactive mathematical graphic.";b.querySelectorAll('img').forEach(function(i){i.alt=d});b.querySelectorAll('pre.sagecell_stdout').forEach(function(p){p.setAttribute('role','status');p.setAttribute('aria-label','Current values from the interactive')})})}
-$(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now',hide:['permalink']});applySageA11y();new MutationObserver(applySageA11y).observe(document.body,{childList:true,subtree:true})});
+$(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});applySageA11y();new MutationObserver(applySageA11y).observe(document.body,{childList:true,subtree:true})});
 </script>
-<!-- END Setup Scripts  -->
 
-
-# Webpage Title
-$\int_a^b f(x) x dx$ gives the net area between $f(x)$ and the $x$-axis on the interval $[a,b]$
+<!-- PART 2: Descriptive Content -->
+# Visualizing Tangent Lines
 
 ## Overview
 
-(Explain the mathematics here)
+If $f(x)$ is any continuous, smooth function,
+we can connect whether $f$ is increasing or decreasing at a point $x=a$ by looking at the line tangent to $f$ at $a$.
 
 ## Instructions
 
-(Explain how to use your interactive here)
+Use the slider to adjust the value of $a$.  
+The graph and the tangent line at $a$ will both be displayed. 
 
-
+<!-- PART 3: Sage Code -->
 <div class="compute" 
-            data-alt="Graph of y = x^2 - 1 with the region between a and b shaded.">
+            data-alt="The image shows the graph of a function and its tangent line at the selected point.">
 <script type="text/x-sage">
 
-f(x) = x^2 -1
+f(x) = x^2 - 1
+xmin = -2
+xmax =  2
+ymin = -2
+ymax =  2
 
-@interact
-def myIntegralPlot( a = slider(-2, 2, 0.05, -1.5 ), b = slider(-2, 2, 0.05, 1 ) ):
-    epsilon = 10^-12
-    
-    # this takes care of several different drawing issues
-    # whenever b < a, or in other words, the bounds are backwards.
-    left_bound = min( a, b )
-    right_bound = max( a, b )
-    
-    # the 10^-12 in the next line might surprise you, but it is because the
-    # program reacted badly when both a=1 and b=1.
-    P1 = plot( f(x), x, left_bound, right_bound + epsilon, fill=True )
-    P2 = plot( f(x), x, -2, 2, gridlines='minor', ymin=-2, ymax=3)
-    P3 = text("$\\int_a^b ( x^2 - 1 ) \\; dx$", (0, -1.75), fontsize=24 )
-    
-    # this colored arrow avoids student confusion when bounds are backwards
-    if (a < b):
-        P4 = arrow( (-0.5, 0.99), (0.5, 1), color='green' )
-        P = P4 + P1 + P2 + P3
-    elif (b < a):
-        P4 = arrow( (0.5, 1), (-0.5, 0.99), color='red' )
-        P = P4 + P1 + P2 + P3
+@interact 
+def plot_tangent( a = slider( xmin, xmax, 0.05, -1.5 )):
+
+    print(f"You have selected a = {a}")
+
+    p1 = plot( f(x) , x, (xmin,xmax) )
+
+    fprime = derivative(f, x)
+    x1 = a
+    y1 = f( x1 )
+    m = fprime( x1 )
+    tangentline(x) = m*(x - x1) + y1
+
+    p2 = plot( tangentline(x), x, (xmin,xmax), ymin=ymin, ymax = ymax , color="red")
+
+    p3 = point((x1, y1), size=30, color='black')
+
+    show(p1+p2+p3)
+
+    print("The tangent line is", end=" ")
+    if m<0:
+        print("going down, so the slope is negative.")
+    elif m>0:
+        print("going up, so the slope is positive.")
     else:
-        # note, this is for the a=b case
-        P = P1 + P2 + P3
-    
-    
-    P.show()
+        print("flat, so the slope is zero.")
     
     print()
-    print("Final Value Roughly ", N( integral( f(x), x, a, b) ))
-    
-    return
+
+    print("Note: The point happens to be", end = " ")
+    if y1 < 0:
+        print("below the x-axis.")
+    elif y1 > 0:
+        print("above the x-axis.")
+    else:
+        print("on the x-axis." )
+    print("But the height of the y-value is NOT relevant to the slope of the line.")
 
 </script>
 </div>
