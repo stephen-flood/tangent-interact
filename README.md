@@ -2,26 +2,11 @@
 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
 <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
 <script>
-function applySageAlt() {
-  document.querySelectorAll('.compute').forEach(function (box) {
-    box.querySelectorAll('img').forEach(function (img) {
-      img.alt = box.dataset.alt || "Interactive mathematical graphic.";
-    });
-  });
-}
-$(function () {
-  sagecell.makeSagecell({
-    inputLocation: 'div.compute',
-    template: sagecell.templates.minimal,
-    evalButtonText: 'Launch the Interactive Applet Now',
-    callback: function () {
-      applySageAlt();
-      new MutationObserver(applySageAlt).observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    }
-  });
+function applySageAlt(){document.querySelectorAll('.compute').forEach(function(box){box.querySelectorAll('img').forEach(function(img){img.alt=box.dataset.alt||"Interactive mathematical graphic."})})}
+$(function(){
+  sagecell.makeSagecell({inputLocation:'div.compute',template:sagecell.templates.minimal,evalButtonText:'Launch the Interactive Applet Now'});
+  applySageAlt();
+  new MutationObserver(applySageAlt).observe(document.body,{childList:true,subtree:true});
 });
 </script>
 <!-- END Setup Scripts  -->
