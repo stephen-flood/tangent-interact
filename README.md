@@ -9,15 +9,17 @@ $(function(){sagecell.makeSagecell({inputLocation:'div.compute',template:sagecel
 <!-- PART 2: Descriptive Content -->
 # Visualizing Tangent Lines
 
-## Overview
+### Overview
+- It is hard to define the slope for a function that is not a line. 
+- A tangent line is the *line appoximating $f(x)$* at a single numerical value of $x$, called $a$.   
+- We know from algebra how to find and interpret the slope of this *line*.
 
-If $f(x)$ is any continuous, smooth function,
-we can connect whether $f$ is increasing or decreasing at a point $x=a$ by looking at the line tangent to $f$ at $a$.
+This interactive lets you move the graph of a tangent along a function, and see what the the changing tangent line tells us about the original function. 
 
-## Instructions
-
-Use the slider to adjust the value of $a$.  
-The graph and the tangent line at $a$ will both be displayed. 
+### Instructions
+- Use the slider to choose a value of $a$.
+- The image displays the graph of $f(x)$, the point $(a,f(a))$, and the tangent line at that point.
+- As you move the slider, watch use the slope ofthe the tangent *line* to describe the the non-linear funciton. 
 
 <!-- PART 3: Sage Code -->
 <div class="compute" 
